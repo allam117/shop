@@ -85,31 +85,45 @@ const Header2 = () => {
 
   return (
     <Container sx={{ my: 3, display: "flex", justifyContent: "space-between" }}>
-    
       <Stack alignItems={"center"}>
         <ShoppingCartOutlined />
-        <Typography variant="body2">E-commerce</Typography>
+        <Typography
+          variant="body2"
+          sx={{
+         
+       fontSize:"18px",
+       marginTop:"1px",
+       color:"",
+          }}
+        >
+          علام
+        </Typography>
       </Stack>
 
-     
       <Search 
-      sx={{display:"flex",
-        justifyContent:"space-between",
-        borderRadius:"22px"
-      }}>
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          borderRadius: "15px",
+          width:"635px"
+        }}
+      >
         <SearchIconWrapper>
           <SearchIcon />
         </SearchIconWrapper>
         <InputBase
           placeholder="Search…"
           inputProps={{ "aria-label": "search" }}
-     sx={{ marginLeft: "45px",}}
+          sx={{ marginLeft: "45px" }}
         />
         <div>
-          <List component="nav" aria-label="Device settings"
-          sx={{
-            p:"0"
-          }}>
+          <List
+            component="nav"
+            aria-label="Device settings"
+            sx={{
+              p: "0",
+            }}
+          >
             <ListItemButton
               id="lock-button"
               aria-haspopup="listbox"
@@ -118,15 +132,15 @@ const Header2 = () => {
               onClick={handleClickListItem}
             >
               <ListItemText
-              className="border"
-
-              sx={{width:100
-                ,
-                textAlign:"center","&:hover":{cursor:"pointer"}
-              }}
+                className="border"
+                sx={{
+                  width: 100,
+                  textAlign: "center",
+                  "&:hover": { cursor: "pointer" },
+                }}
                 secondary={options[selectedIndex]}
               />
-              <ExpandMore sx={{fontSize:"16PX"}}/>
+              <ExpandMore sx={{ fontSize: "16PX" }} />
             </ListItemButton>
           </List>
           <Menu

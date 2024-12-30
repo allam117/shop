@@ -54,26 +54,27 @@ function Header1() {
   };
 
   return (
-    <Box sx={{ bgcolor: "#2B3445", py: "0.1px"}}>
+    <Box sx={{ bgcolor: "#2B3445", py: "0.1px" }}>
       <Container>
         <Stack direction={"row"} alignItems={"center"}>
-          <Typography
+          <Typography padding={"5px"}
             sx={{
               mr: 2,
-              p: "3px 10px",
+              p: "5px px 10px",
               bgcolor: "#D23F57",
               borderRadius: "12px",
-              fontSize: "10px",
-              color: "#fff",
+              fontSize: "20px",
+            
             }}
-            variant="body2"
+            // variant="body2"
           >
-            Hot
+            علام
           </Typography>
           <Typography
             sx={{
+              p: "5px 10px",
               fontWeight: "300",
-              fontSize: "10px",
+              fontSize: "20px",
               color: "#fff",
               bgcolor: "#D23F57",
               borderRadius: "12px",
@@ -81,7 +82,7 @@ function Header1() {
             }}
             variant="body2"
           >
-            Toggle Theme
+            النور للأدوات الكهربائيه
           </Typography>
 
           <Box flexGrow={1} />
