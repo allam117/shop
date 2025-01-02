@@ -14,6 +14,9 @@ import {
 } from "@mui/material";
 import { AddShoppingCartOutlined, Close } from "@mui/icons-material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import image1 from "../../assets/images/image9.jpg";
+import image2 from "../../assets/images/image17.jpg";
+import image from "../../assets/images/image10.jpg";
 // import ProductDetails from "./components/main/ProductDetails";
 
 const MainComponent = ({ imagess = [] }) => {
@@ -185,7 +188,7 @@ const MainComponent = ({ imagess = [] }) => {
           }}
         >
           <Box>
-            <img width={300} height={350} src="src\images\image11.jpg" alt="" />
+            <img width={300} height={350} src={image} alt="" />
           </Box>
           <Box>
             <Typography marginTop={"10px"} variant="h5">
@@ -208,11 +211,7 @@ const MainComponent = ({ imagess = [] }) => {
               mmmmm mmmmmmmmmmmmmmmmmmmmm
             </Typography>
             <Stack direction={"row"}>
-              {[
-                "src/images/image9.jpg",
-                "src/images/image17.jpg",
-                "src/images/image10.jpg",
-              ].map((item) => (
+              {[image1, image2, image].map((item) => (
                 <img
                   key={item}
                   src={item}

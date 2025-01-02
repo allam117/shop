@@ -1,4 +1,4 @@
-
+import { useNavigate } from "react-router-dom";
 import  { useState } from "react";
 import {
   Badge,
@@ -66,6 +66,9 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 
 
 const Header2 = () => {
+  const navigate = useNavigate("");
+    const [login, setLogin] = useState(true);
+
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(1);
   const open = Boolean(anchorEl);
@@ -82,6 +85,13 @@ const Header2 = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const navigateToCart = () => {
+    navigate("/cart");
+  };
+ const navigateToLogin = () => {
+   navigate("/login");
+  
+ };
 
   return (
     <Container sx={{ my: 3, display: "flex", justifyContent: "space-between" }}>
@@ -90,22 +100,21 @@ const Header2 = () => {
         <Typography
           variant="body2"
           sx={{
-         
-       fontSize:"18px",
-       marginTop:"1px",
-       color:"",
+            fontSize: "18px",
+            marginTop: "1px",
+            color: "",
           }}
         >
           علام
         </Typography>
       </Stack>
 
-      <Search 
+      <Search
         sx={{
           display: "flex",
           justifyContent: "space-between",
           borderRadius: "15px",
-          width:"635px"
+          width: "635px",
         }}
       >
         <SearchIconWrapper>
@@ -168,12 +177,12 @@ const Header2 = () => {
 
       {/* Icons Section */}
       <Stack direction={"row"} alignItems={"center"}>
-        <IconButton aria-label="cart">
+        <IconButton onClick={navigateToCart} aria-label="cart">
           <StyledBadge badgeContent={4} color="primary">
             <ShoppingCartIcon />
           </StyledBadge>
         </IconButton>
-        <IconButton>
+        <IconButton onClick={navigateToLogin}>
           <Person2OutlinedIcon />
         </IconButton>
       </Stack>

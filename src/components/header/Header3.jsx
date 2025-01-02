@@ -35,7 +35,7 @@ const Header3 = () => {
     setAnchorEl(event.currentTarget);
   };
   const handleMenuItemClick = () => {
-    navigate("/maincom");
+    navigate("/categories");
     setAnchorEl(null); // إغلاق القائمة بعد اختيار العنصر
   };
   const theme = useTheme();
@@ -160,11 +160,11 @@ const Header3 = () => {
         </Menu>
       </Box>
       <Link />
-      {useMediaQuery("(max-width:1000px)") && (
+      {/* {useMediaQuery("(max-width:1000px)") && (
         <IconButton onClick={toggleDrawer("right", true)}>
           <MenuIcon />
         </IconButton>
-      )}
+      )} */}
 
       <Drawer
         anchor={"right"}
