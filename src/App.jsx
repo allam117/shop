@@ -5,6 +5,7 @@ import { ColorModeContext, useMode } from "./theme";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { getCollections } from "./lib/shopify"; // 
 import Header1 from "./components/header/Header1";
+
 import Header2 from "./components/header/Header2";
 import Header3 from "./components/header/Header3";
 import HeaderFinal from "./components/header/HeaderFinal";
