@@ -75,6 +75,8 @@ export const createShopifyFetch = (baseUrl: string, init?: Init) => {
 const domain = ensureStartsWith(config.shopify.domain, "https://");
 const endpoint = `/api/${config.shopify.apiVersion}/graphql.json`;
 
+
+
 export const shopifyFetch = createShopifyFetch(`${domain}${endpoint}`, {
   headers: {
     "Accept-Language": localStorage.getItem("language") || "en",

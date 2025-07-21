@@ -1,127 +1,145 @@
-import { useState, useEffect } from "react";
-import { Box, Typography } from "@mui/material";
 
-const ImageMove3 = ({ imagess, interval = 9000, transitionDuration = 1000 }) => {
+
+import { useState, useEffect } from "react";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
+const ImageMove3 = ({
+  company = [],
+  interval = 3000,
+  transitionDuration = 1500,
+}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const totalImages = imagess.length;
+  const [visibleImages, setVisibleImages] = useState([]);
+  const navigate = useNavigate();
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
+  
+  const imageSizeLarge = 180;
+  const imageSizeSmall = 160;
+  const imageGap = 22;
 
   useEffect(() => {
+    setVisibleImages(company.slice(11, 20));
+  }, [company]);
+
+  useEffect(() => {
+    if (visibleImages.length === 0) return;
+
     const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % totalImages);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % visibleImages.length);
     }, interval);
+
     return () => clearInterval(timer);
-  }, [totalImages, interval]);
-
-  const imageSizeLarge = 275;
-  const imageSizeSmall = 182;
-  const imageGap = 12;
-  const verticalMargin = 10;
-
-  const initialTranslateX = -10;
+  }, [visibleImages, interval]);
 
   return (
     <Box
       sx={{
         position: "relative",
         width: "92%",
-        marginTop: "0px",
-
         maxWidth: "1160px",
         margin: "0 auto",
         overflow: "hidden",
         borderRadius: "3px",
-      
         marginBottom: "10px",
-        paddingBottom: "10apx",
-       
+        paddingBottom: "10px",
       }}
     >
-      {/* <Box marginTop={"40px"}></Box> */}
       <Box
-        display={"flex"}
-        justifyContent={"space-between"}
-        padding={"30px 0px 15px 0px"}
+        display="flex"
+        justifyContent="space-between"
+        padding="30px 0px 15px 0px"
       >
-        <Typography
-          color="black"
-          fontSize={"18px"}
-         
-          marginLeft={"10px"}
-        >
+        <Typography color="black" fontSize="18px" marginLeft="10px">
           شاهد الكل
         </Typography>
-
         <Typography
           color="black"
-          fontSize={"25px"}
-          marginRight={"15px"}
-          fontWeight={"bold"}
-          // marginTop={"5px"}
+          fontSize="25px"
+          marginRight="15px"
+          fontWeight="bold"
         >
-         شركات نتعامل معاها
+          شركات نتعامل معها
         </Typography>
       </Box>
+
       <Box
         sx={{
           display: "flex",
           transition: `transform ${transitionDuration / 1000}s ease-in-out`,
-          transform: {
-            xs: `translateX(${
-              initialTranslateX - currentIndex * (imageSizeSmall + imageGap)
-            }px)`,
-            sm: `translateX(${
-              initialTranslateX - currentIndex * (imageSizeLarge + imageGap)
-            }px)`,
-          },
+          transform: `translateX(-${
+            isSmallScreen
+              ? currentIndex * (imageSizeSmall + imageGap)
+              : currentIndex * (imageSizeLarge + imageGap)
+          }px)`,
           gap: `${imageGap}px`,
-          marginLeft: "20px",
+          marginLeft: "10px",
         }}
       >
-        {imagess.map((image, index) => (
-          <Box
-            key={index}
-            component="img"
-            src={image.src}
-            alt={image.alt || `Slide ${index}`}
-            sx={{
-              objectFit: "cover",
-              borderRadius: "8px",
-              width: {
-                xs: `${imageSizeSmall}px`,
-                sm: `${imageSizeLarge}px`,
-              },
-              height: {
-                xs: `${imageSizeSmall}px`,
-                sm: `${imageSizeLarge}px`,
-              },
-              marginTop: `${verticalMargin}px`,
-              marginBottom: `${verticalMargin}px`,
-            }}
-          />
-        ))}
-
-        {imagess.map((image, index) => (
-          <Box
-            key={`clone-${index}`}
-            component="img"
-            src={image.src}
-            alt={`Clone ${image.alt || `Slide ${index}`}`}
-            sx={{
-              objectFit: "cover",
-              borderRadius: "8px",
-              width: {
-                xs: `${imageSizeSmall}px`,
-                sm: `${imageSizeLarge}px`,
-              },
-              height: {
-                xs: `${imageSizeSmall}px`,
-                sm: `${imageSizeLarge}px`,
-              },
-              marginTop: `${verticalMargin}px`,
-              marginBottom: `${verticalMargin}px`,
-            }}
-          />
-        ))}
+        {visibleImages.length > 0 ? (
+          visibleImages.map((image, index) => (
+            <Box
+              key={index}
+              onClick={() => {
+                if (image.handle) {
+                  navigate(`/categories/${image.handle}`);
+                }
+              }}
+              sx={{
+                cursor: "pointer",
+                borderRadius: "8px",
+                overflow: "hidden",
+                width: {
+                  xs: `${imageSizeSmall}px`,
+                  sm: `${imageSizeLarge}px`,
+                },
+                flexShrink: 0,
+                // backgroundColor: "#f0f0f0",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Box
+                sx={{
+                  width: "100%",
+                  height: {
+                    xs: `${imageSizeSmall}px`,
+                    sm: `${imageSizeLarge}px`,
+                  },
+                }}
+              >
+                <img
+                  src={image.src}
+                  alt={image.name || `Company ${index + 1}`}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
+              </Box>
+            
+              <Typography
+                variant="body2"
+                sx={{
+                  marginTop: "20px",
+                  textAlign: "center",
+                  fontSize: "20px",
+                  color: "#333",
+                }}
+              >
+                {image.name}
+              </Typography>
+            </Box>
+          ))
+        ) : (
+          <Typography sx={{ marginLeft: "20px" }}>
+            لا توجد شركات متاحة
+          </Typography>
+        )}
       </Box>
     </Box>
   );

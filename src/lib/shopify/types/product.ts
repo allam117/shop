@@ -72,3 +72,51 @@ export type ShopifyProductsOperation = {
     after?: string;
   };
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+// export async function fetchCollectionProducts({
+//   collectionHandle,
+//   first = 15,
+// }: {
+//   collectionHandle: string;
+//   first?: number;
+// }): Promise<Product[]> {
+//   const res = await shopifyFetch<ShopifyCollectionProductsOperation>({
+//     query: getCollectionProductsQuery,
+//     tags: [TAGS.products],
+//     variables: {
+//       first,
+//       collectionHandle,
+//     },
+//   });
+
+//   return reshapeProducts(
+//     removeEdgesAndNodes(res.body.data.collectionByHandle.products)
+//   );
+// }
+
+
+
+
+// types/product.ts
+
+export interface Product {
+  id: string;
+  title: string;
+  handle: string;
+  description: string;
+  images: {
+    url: string;
+  }[];
+}

@@ -1,7 +1,4 @@
-
-
-
-import  { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { ColorModeContext } from "../../theme";
 import {
   IconButton,
@@ -57,36 +54,20 @@ function Header1() {
     <Box sx={{ bgcolor: "#2B3445", py: "0.1px" }}>
       <Container>
         <Stack direction={"row"} alignItems={"center"}>
-          <Typography padding={"5px"}
+          <Typography
+            padding={"5px"}
             sx={{
               mr: 2,
               p: "5px px 10px",
-              bgcolor: "#D23F57",
-              borderRadius: "12px",
-              fontSize: "20px",
-            
-            }}
-            // variant="body2"
-          >
-            علام
-          </Typography>
-          <Typography
-            sx={{
-              p: "5px 10px",
-              fontWeight: "300",
-              fontSize: "20px",
+
               color: "#fff",
-              bgcolor: "#D23F57",
               borderRadius: "12px",
-              padding: "2px",
+              fontSize: "20px",
             }}
-            variant="body2"
           >
             النور للأدوات الكهربائيه
           </Typography>
-
           <Box flexGrow={1} />
-
           <IconButton onClick={handleToggle} color="inherit">
             {theme.palette.mode === "light" ? (
               <LightModeOutlinedIcon sx={{ color: "white" }} />
@@ -94,7 +75,6 @@ function Header1() {
               <DarkModeOutlinedIcon sx={{ color: "white" }} />
             )}
           </IconButton>
-
           <List component="nav" aria-label="Language selection">
             <ListItemButton
               id="lock-button"
@@ -131,9 +111,22 @@ function Header1() {
               </MenuItem>
             ))}
           </Menu>
-
-          <FacebookIcon sx={{ fontSize: "20px", mx: 1, color: "#fff" }} />
-          <WhatsAppIcon sx={{ fontSize: "20px", mx: 1, color: "#fff" }} />
+          <a
+            href="https://www.facebook.com/profile.php?id=100083448092680&mibextid=JRoKGi"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ textDecoration: "none" }}
+          >
+            <FacebookIcon sx={{ fontSize: "20px", mx: 1, color: "#fff" }} />
+          </a>
+          <a
+            href="https://wa.me/01096996792"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ textDecoration: "none" }}
+          >
+            <WhatsAppIcon sx={{ fontSize: "20px", mx: 1, color: "#fff" }} />
+          </a>{" "}
         </Stack>
       </Container>
     </Box>
@@ -141,5 +134,3 @@ function Header1() {
 }
 
 export default Header1;
-
-

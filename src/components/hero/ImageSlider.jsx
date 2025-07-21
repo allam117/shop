@@ -20,7 +20,7 @@ const ImageSlider = ({ images, interval = 1000 }) => {
       marginTop:"70px",
         maxWidth: "1200px",
         padding:"20px",
-        // height:"300px",
+   
         margin: "0 auto",
         overflow: "hidden",
         borderRadius: "8px",

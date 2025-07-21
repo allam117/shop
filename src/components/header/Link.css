@@ -1,0 +1,22 @@
+
+
+.menu {
+    display: none;
+}
+
+header.flex nav {
+    background-color: var(--bgHeader);
+    padding: 0.8rem 2rem;
+    border-radius: 20px;
+    box-shadow: 1px 1px 40px rgba(35, 35, 36, 0.16);
+}
+
+@media (max-width: 700px) {
+    header.flex nav {
+        display: flex;
+        flex-direction: column;
+    }
+    .menu {
+        display: block;
+    }
+}

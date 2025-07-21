@@ -1,10 +1,10 @@
+
 import { useNavigate } from "react-router-dom";
-import  { useState } from "react";
+import { useState } from "react";
 import {
   Badge,
   Container,
   Stack,
-  Typography,
   InputBase,
   IconButton,
   List,
@@ -15,16 +15,13 @@ import {
 } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import {
-  ShoppingCartOutlined,
   Search as SearchIcon,
   Person2Outlined as Person2OutlinedIcon,
   ShoppingCart as ShoppingCartIcon,
   ExpandMore,
 } from "@mui/icons-material";
 
-
 const options = ["Option 1", "Option 2", "Option 3"];
-
 
 const Search = styled("div")(({ theme }) => ({
   flexGrow: "0.4",
@@ -33,12 +30,11 @@ const Search = styled("div")(({ theme }) => ({
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   border: "1px solid #333",
   "&:hover": {
-    // backgroundColor: alpha(theme.palette.common.white, 0.25),
     border: "1px solid #777",
   },
-  marginRight: theme.spacing(2),
+  marginRight: theme.spacing(1),
   width: "100%",
-  minWidth: "300PX",
+  minWidth: "20px",
   [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(3),
     width: "auto",
@@ -49,8 +45,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
     right: -3,
     top: 13,
-    border: `2px solid ${theme.palette.background.paper}`,
-    padding: "0 4px",
+    padding: "0px 4px",
   },
 }));
 
@@ -61,16 +56,16 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  color:"#777"
+  color: "#777",
 }));
 
-
 const Header2 = () => {
-  const navigate = useNavigate("");
-    const [login, setLogin] = useState(true);
-
+  const navigate = useNavigate();
+  const [login, setLogin] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+
   const open = Boolean(anchorEl);
 
   const handleClickListItem = (event) => {
@@ -85,31 +80,25 @@ const Header2 = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const navigateToCart = () => {
     navigate("/cart");
   };
- const navigateToLogin = () => {
-   navigate("/login");
-  
- };
+
+  const navigateToLogin = () => {
+    navigate("/login");
+  };
+
+  const handleSearch = () => {
+    if (!searchTerm.trim()) return;
+    navigate(`/search?q=${encodeURIComponent(searchTerm)}`);
+  };
 
   return (
-    <Container sx={{ my: 3, display: "flex", justifyContent: "space-between" }}>
-      <Stack alignItems={"center"}>
-        <ShoppingCartOutlined />
-        <Typography
-          variant="body2"
-          sx={{
-            fontSize: "18px",
-            marginTop: "1px",
-            color: "",
-          }}
-        >
-          علام
-        </Typography>
-      </Stack>
+    <Container sx={{ my: 2, display: "flex", justifyContent: "space-between" }}>
+      <Stack alignItems={"center"}></Stack>
 
-      <Search
+      <Search style={{direction:"rtl"}}
         sx={{
           display: "flex",
           justifyContent: "space-between",
@@ -121,18 +110,19 @@ const Header2 = () => {
           <SearchIcon />
         </SearchIconWrapper>
         <InputBase
-          placeholder="Search…"
+          placeholder="البحث عن المنتاجات"
           inputProps={{ "aria-label": "search" }}
-          sx={{ marginLeft: "45px" }}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
+          sx={{ marginRight: "45px", flex: 1 }}
         />
         <div>
-          <List
-            component="nav"
-            aria-label="Device settings"
-            sx={{
-              p: "0",
-            }}
-          >
+          <List component="nav" aria-label="Device settings" sx={{ p: "0" }}>
             <ListItemButton
               id="lock-button"
               aria-haspopup="listbox"
@@ -149,7 +139,7 @@ const Header2 = () => {
                 }}
                 secondary={options[selectedIndex]}
               />
-              <ExpandMore sx={{ fontSize: "16PX" }} />
+              <ExpandMore sx={{ fontSize: "16px" }} />
             </ListItemButton>
           </List>
           <Menu

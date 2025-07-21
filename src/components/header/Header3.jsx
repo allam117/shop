@@ -10,8 +10,6 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-
-
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -27,7 +25,10 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import Link from "./Link";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-const Header3 = () => { 
+// بيانات المنتجات
+
+
+const Header3 = () => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -36,15 +37,15 @@ const Header3 = () => {
   };
   const handleMenuItemClick = () => {
     navigate("/categories");
-    setAnchorEl(null); // إغلاق القائمة بعد اختيار العنصر
   };
   const theme = useTheme();
+  
 
   const [state, setState] = useState({
     top: false,
     left: false,
     bottom: false,
-    right: false, 
+    right: false,
   });
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -73,6 +74,14 @@ const Header3 = () => {
     </Box>
   );
 
+  const [activeProducts, setActiveProducts] = useState([]);
+
+  
+  const handleButtonClick = (products) => {
+    setActiveProducts(products); 
+    setAnchorEl(null); 
+  };
+
   return (
     <Container
       sx={{
@@ -81,7 +90,7 @@ const Header3 = () => {
         justifyContent: "space-between",
       }}
     >
-      <Box>
+      <Box onClick={handleMenuItemClick}>
         <Button
           id="basic-button"
           aria-controls={open ? "basic-menu" : undefined}
@@ -103,68 +112,32 @@ const Header3 = () => {
               mx: 1,
               fontSize: "24px",
               fontWeight: "bold",
+              color: theme.palette.text.primary,
             }}
           >
-            الاقسام
+            المنتجات
           </Typography>
           <Box flexGrow={1} />
           <KeyboardArrowRightOutlinedIcon />
         </Button>
-        <Menu
-          id="basic-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleMenuItemClick}
-          MenuListProps={{
-            "aria-labelledby": "basic-button",
-          }}
-          sx={{
-            width: "400",
-            ".MuiPaper-root": { width: 220, marginTop: 16 },
-            ".MuiMenuItem-root": { fontSize: 18 },
-          }}
-        >
-          <Button
-            onClick={handleMenuItemClick}
-            variant="contained"
-            color="primary"
-          >
-            Click Me
-          </Button>
-          <MenuItem onClick={handleMenuItemClick}>الاسلاك المعزوله</MenuItem>
-          <MenuItem onClick={handleMenuItemClick}>اسلاك النت</MenuItem>
-          <MenuItem onClick={handleMenuItemClick}>الجلوبات </MenuItem>
-          <MenuItem onClick={handleMenuItemClick}>
-            الدلايات بأشكاله المختلفه
-          </MenuItem>
-          <MenuItem onClick={handleMenuItemClick}>
-            اسبوتات ليد داخل وخارج
-          </MenuItem>
-          <MenuItem onClick={handleMenuItemClick}>كشافات وجهات شوارع</MenuItem>
-          <MenuItem onClick={handleMenuItemClick}>خراطيم الليد</MenuItem>
-          <MenuItem onClick={handleMenuItemClick}>الخرطوم</MenuItem>
-          <MenuItem onClick={handleMenuItemClick}>السوسته (الفليسكبل)</MenuItem>
-          <MenuItem onClick={handleMenuItemClick}>
-            بواطات بانواعها المختلفه
-          </MenuItem>
-          <MenuItem onClick={handleMenuItemClick}>علب ماجيك</MenuItem>
-          <MenuItem onClick={handleMenuItemClick}>
-            مفاتيح التشغيل والسكاكين
-          </MenuItem>
-          <MenuItem onClick={handleMenuItemClick}>
-            مشتركات بانواعها المختلفه
-          </MenuItem>
-          <MenuItem onClick={handleMenuItemClick}>الاجراس</MenuItem>
-          <MenuItem onClick={handleMenuItemClick}>شريط اللحام</MenuItem>
-          <MenuItem onClick={handleMenuItemClick}>مستلزمات الدش</MenuItem>
-        </Menu>
       </Box>
+
+     
+      <Box sx={{ marginTop: "20px" }}>
+        {activeProducts.length > 0 ? (
+          activeProducts.map((product) => (
+            <Box key={product.id} sx={{ marginBottom: "10px" }}>
+              <Typography variant="h6">{product.name}</Typography>
+              <Typography variant="body1">{product.price}</Typography>
+            </Box>
+          ))
+        ) : (
+          <Typography variant="h6"></Typography>
+        )}
+      </Box>
+
       <Link />
-      {/* {useMediaQuery("(max-width:1000px)") && (
-        <IconButton onClick={toggleDrawer("right", true)}>
-          <MenuIcon />
-        </IconButton>
-      )} */}
+   
 
       <Drawer
         anchor={"right"}
@@ -190,6 +163,7 @@ const Header3 = () => {
           <Typography
             sx={{
               fontSize: "24px",
+            
             }}
           >
             الرئيسيه
