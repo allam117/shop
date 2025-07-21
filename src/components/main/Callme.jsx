@@ -2,11 +2,16 @@
 
 
 
-
+import React from "react";
 import { Box, Typography, IconButton } from "@mui/material";
 import {
   Facebook,
-
+  Twitter,
+  Instagram,
+  WhatsApp,
+  Telegram,
+  YouTube,
+  LinkedIn,
 } from "@mui/icons-material";
 
 const socialLinks = [
