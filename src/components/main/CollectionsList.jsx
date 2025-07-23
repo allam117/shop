@@ -86,11 +86,11 @@ export default function CollectionsList() {
           justifyContent: "space-between",
           alignItems: "flex-end",
           width: "100%", // مهم لتأكيد الامتداد الكامل
-          padding: "0 16px", // اختياري: تباعد داخلي بسيط
+
         }}
       >
         <Typography sx={{ fontSize: "1.3rem", fontWeight: "bold",paddingLeft:"10px" }}>
-          كل المنتجات
+   
         </Typography>
 
         <Box>

@@ -80,8 +80,8 @@ const ImageMove2 = ({ interval = 7000, transitionDuration = 1500 }) => {
         margin: "0 auto",
         overflow: "hidden",
         borderRadius: "3px",
-        marginBottom: "10px",
-        paddingBottom: "10px",
+        // marginBottom: "10px",
+        // paddingBottom: "10px",
       }}
     >
       <Box
@@ -159,7 +159,7 @@ const ImageMove2 = ({ interval = 7000, transitionDuration = 1500 }) => {
 
               <Typography
                 sx={{
-                  fontSize: "19px",
+                  fontSize: "17px",
                   paddingTop: "10px",
                   textAlign: "center",
                   color: "#444",

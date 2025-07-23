@@ -21,7 +21,7 @@ import {
   ExpandMore,
 } from "@mui/icons-material";
 
-const options = ["Option 1", "Option 2", "Option 3"];
+// const options = ["Option 1", "Option 2", "Option 3"];
 
 const Search = styled("div")(({ theme }) => ({
   flexGrow: "0.4",
@@ -122,27 +122,8 @@ const Header2 = () => {
           sx={{ marginRight: "45px", flex: 1 }}
         />
         <div>
-          <List component="nav" aria-label="Device settings" sx={{ p: "0" }}>
-            <ListItemButton
-              id="lock-button"
-              aria-haspopup="listbox"
-              aria-controls="lock-menu"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClickListItem}
-            >
-              <ListItemText
-                className="border"
-                sx={{
-                  width: 100,
-                  textAlign: "center",
-                  "&:hover": { cursor: "pointer" },
-                }}
-                secondary={options[selectedIndex]}
-              />
-              <ExpandMore sx={{ fontSize: "16px" }} />
-            </ListItemButton>
-          </List>
-          <Menu
+     
+          {/* <Menu
             id="lock-menu"
             anchorEl={anchorEl}
             open={open}
@@ -161,7 +142,7 @@ const Header2 = () => {
                 {option}
               </MenuItem>
             ))}
-          </Menu>
+          </Menu> */}
         </div>
       </Search>
 

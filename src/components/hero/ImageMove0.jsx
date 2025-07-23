@@ -15,9 +15,9 @@ const ImageMove0 = ({
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   
-  const imageSizeLarge = 180;
+  const imageSizeLarge = 175;
   const imageSizeSmall = 160;
-  const imageGap = 22;
+  const imageGap = 18;
 
   useEffect(() => {
     setVisibleImages(company.slice(0, 10));

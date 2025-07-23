@@ -30,7 +30,7 @@ export default function Espotat() {
       sx={{
         position: "relative",
         width: "100%",
-        marginTop: "70px",
+        marginTop: "40px",
         maxWidth: "1170px",
         padding: "20px",
         margin: "0 auto",
