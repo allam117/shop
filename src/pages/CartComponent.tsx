@@ -1,6 +1,3 @@
-
-
-
 import {
   Box,
   Typography,
@@ -22,14 +19,23 @@ import {
   createCart,
   getCartCheckoutUrl,
   removeFromCart,
+  Cart,
 } from "../lib/shopify";
+
+const formateCurrency = (amount: number, code: string) => {
+  const options = Intl.NumberFormat("ar-EG", {
+    currency: code,
+  });
+
+  return options.format(amount);
+};
 
 const ShoppingCart = () => {
   const theme = useTheme();
   const navigate = useNavigate();
 
-  const [cart, setCart] = useState(null);
-  const [checkoutUrl, setCheckoutUrl] = useState(null);
+  const [cart, setCart] = useState<Cart>();
+  const [checkoutUrl, setCheckoutUrl] = useState<string>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -41,10 +47,13 @@ const ShoppingCart = () => {
           cartId = newCart.id;
           localStorage.setItem("cartId", cartId);
         }
-        const data = await getCart(cartId);
-        console.log("Cart data:", data); 
+        const [data, checkoutUrl] = await Promise.all([
+          getCart(cartId),
+          getCartCheckoutUrl(cartId),
+        ]);
+
         setCart(data);
-        setCheckoutUrl(await getCartCheckoutUrl(cartId));
+        setCheckoutUrl(checkoutUrl);
       } catch (e) {
         console.error(e);
       } finally {
@@ -96,8 +105,9 @@ const ShoppingCart = () => {
           <>
             <List>
               {cart.lines.map((line) => {
-                // const unit = parseFloat(line.merchandise.price.amount || "0");
-                const unit = parseFloat(line.merchandise?.price?.amount || "0");
+                const unit = parseFloat(
+                  line.merchandise.product.priceRange.minVariantPrice.amount
+                );
 
                 const total = unit * line.quantity;
                 return (
@@ -115,13 +125,21 @@ const ShoppingCart = () => {
                       secondary={
                         <>
                           <Typography variant="body2">
-                            سعر الوحدة: ${unit.toFixed(2)}
+                            سعر الوحدة:
+                            {
+                              line.merchandise.product.priceRange
+                                .maxVariantPrice.amount
+                            }
                           </Typography>
                           <Typography variant="body2">
                             الكمية: {line.quantity}
                           </Typography>
                           <Typography variant="body2" fontWeight="bold">
-                            الإجمالي: ${total.toFixed(2)}
+                            الإجمالي:{" "}
+                            {formateCurrency(
+                              line.cost.totalAmount.amount,
+                              line.cost.totalAmount.currencyCode
+                            )}
                           </Typography>
                         </>
                       }
