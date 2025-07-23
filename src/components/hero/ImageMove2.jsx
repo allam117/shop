@@ -16,7 +16,7 @@ const ImageMove2 = ({ interval = 7000, transitionDuration = 1500 }) => {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const imageSizeLarge = 218;
-  const imageSizeSmall = 160;
+  const imageSizeSmall = 155;
   const imageGap = 12;
 
   useEffect(() => {
@@ -80,8 +80,7 @@ const ImageMove2 = ({ interval = 7000, transitionDuration = 1500 }) => {
         margin: "0 auto",
         overflow: "hidden",
         borderRadius: "3px",
-        // marginBottom: "10px",
-        // paddingBottom: "10px",
+      
       }}
     >
       <Box

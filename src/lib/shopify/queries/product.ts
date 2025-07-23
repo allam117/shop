@@ -115,8 +115,6 @@ export const getLatestProductsQuery = /* GraphQL */ `
 
 
 
-
-
 export const getCollectionProductsQuery = `
   query getCollectionProducts($first: Int!, $collectionHandle: String!) {
     collectionByHandle(handle: $collectionHandle) {
@@ -127,6 +125,7 @@ export const getCollectionProductsQuery = `
           node {
             id
             title
+            handle           
             description
             priceRange {
               minVariantPrice {
@@ -144,6 +143,3 @@ export const getCollectionProductsQuery = `
     }
   }
 `;
-
-
-

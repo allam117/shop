@@ -21,7 +21,7 @@ import {
 import FacebookIcon from "@mui/icons-material/Facebook";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
-const options = ["Ar", "En"];
+const options = ["Ar"];
 
 function Header1() {
   const colorMode = useContext(ColorModeContext);
@@ -51,7 +51,7 @@ function Header1() {
   };
 
   return (
-    <Box sx={{ bgcolor: "#2B3445", py: "0.1px" }}>
+    <Box style={{direction:"rtl"}} sx={{ bgcolor: "#2B3445", py: "0.1px" }}>
       <Container>
         <Stack direction={"row"} alignItems={"center"}>
           <Typography

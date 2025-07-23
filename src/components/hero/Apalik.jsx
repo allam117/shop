@@ -1,14 +1,26 @@
 
 
+
 import image19 from "../../assets/images/image19.webp";
-import { Box, Typography, CircularProgress } from "@mui/material";
+import {
+  Box,
+  Typography,
+  CircularProgress,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { fetchCollectionProducts } from "@lib/shopify";
 
 export default function Apalik() {
   const collectionHandle = "الاباليك-بأشكالها-المختلفه";
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -30,17 +42,10 @@ export default function Apalik() {
       sx={{
         position: "relative",
         width: "100%",
-        marginTop: "70px",
+        margin: "40px auto",
         maxWidth: "1170px",
         padding: "20px",
-        margin: "0 auto",
-        overflow: "hidden",
         borderRadius: "8px",
-        display: "flex",
-        flexDirection: "column",
-        gap: 2,
-        justifyContent: "center",
-        alignItems: "center",
       }}
     >
       <Box
@@ -56,36 +61,81 @@ export default function Apalik() {
           height: "auto",
           marginBottom: "20px",
           transition: "transform 0.8s ease",
+          display: "block",
+          marginLeft: "auto",
+          marginRight: "auto",
         }}
       />
 
       {loading ? (
-        <CircularProgress />
+        <Box textAlign="center">
+          <CircularProgress />
+        </Box>
       ) : products.length > 0 ? (
-        <Box display="flex" flexWrap="wrap" gap={2} justifyContent="center">
-          {products.slice(0, 5).map((product) => (
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: 0.6,
+          }}
+        >
+          {products.map((product) => (
             <Box
-              key={product.id}
+              key={product.handle}
+              
+              onClick={() => navigate(`/products/${product.handle}`)}
               sx={{
                 borderRadius: "8px",
                 padding: 1,
-                width: "213px",
+                cursor: "pointer",
+                width: {
+                  xs: "165px",
+                  sm: "213px",
+                },
+                flexShrink: 0,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
               }}
             >
-              <img
-                src={product.featuredImage?.url || "/placeholder.jpg"}
-                alt={product.title}
-                style={{ width: "100%", height: "200px", objectFit: "cover" }}
-              />
-   
-              <Typography variant="h6" mt={1} sx={{ textAlign: "center" }}>
-                {product.description?.substring(0, 80)}
+              <Box
+                sx={{
+                  width: "100%",
+                  height: {
+                    xs: "155px",
+                    sm: "213px",
+                  },
+                  overflow: "hidden",
+                  borderRadius: "8px",
+                }}
+              >
+                <img
+                  src={product.featuredImage?.url || "/placeholder.jpg"}
+                  alt={product.title}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
+              </Box>
+              <Typography
+                sx={{
+                  fontSize: "16px",
+                  paddingTop: "10px",
+                  textAlign: "center",
+                  color: "#444",
+                }}
+              >
+                {product.description?.substring(0, 80) || "بدون وصف"}
               </Typography>
             </Box>
           ))}
+          
         </Box>
       ) : (
-        <Typography>لا توجد منتجات</Typography>
+        <Typography textAlign="center">لا توجد منتجات</Typography>
       )}
     </Box>
   );

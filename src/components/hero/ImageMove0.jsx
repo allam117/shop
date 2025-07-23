@@ -16,7 +16,7 @@ const ImageMove0 = ({
 
   
   const imageSizeLarge = 175;
-  const imageSizeSmall = 160;
+  const imageSizeSmall = 155;
   const imageGap = 18;
 
   useEffect(() => {
