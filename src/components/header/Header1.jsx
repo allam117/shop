@@ -62,7 +62,7 @@ function Header1() {
 
               color: "#fff",
               borderRadius: "12px",
-              fontSize: "20px",
+              fontSize: "18px",
             }}
           >
             النور للأدوات الكهربائيه

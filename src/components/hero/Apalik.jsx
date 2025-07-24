@@ -90,7 +90,7 @@ export default function Apalik() {
                 padding: 1,
                 cursor: "pointer",
                 width: {
-                  xs: "165px",
+                  xs: "155px",
                   sm: "213px",
                 },
                 flexShrink: 0,
